@@ -6,15 +6,10 @@
     display: none;
 }
 
+/* Hide scrollbar for IE, Edge and Firefox */
 * {
     -ms-overflow-style: none;
+    /* IE and Edge */
     scrollbar-width: none;
-}
-
-body {
-    padding: 10px 15px;
-    min-height: 100dvh;
-    width: 100%;
-    max-width: 410px;
-    margin: 0px auto;
+    /* Firefox */
 }
