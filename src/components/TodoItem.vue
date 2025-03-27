@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import CustomCheckbox from '@/components/CustomCheckbox.vue'
-import type { ToDoItem } from './TodoList.vue'
+import type { LeavingAffairs } from '@/store/leavingAffairsStore'
 
-withDefaults(defineProps<ToDoItem>(), {
+withDefaults(defineProps<LeavingAffairs>(), {
   title: '',
   done: false,
   id: 0,

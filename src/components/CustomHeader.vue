@@ -15,5 +15,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 20px;
+  p {
+    font-weight: bold;
+    font-size: 20px;
+  }
 }
 </style>

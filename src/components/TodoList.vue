@@ -1,44 +1,14 @@
 <script lang="ts" setup>
 import TodoItem from '@/components/TodoItem.vue'
-import { reactive } from 'vue'
+import { useLeavingAffairsStore } from '@/store/leavingAffairsStore'
 
-export type ToDoItem = {
-  id: number
-  title: string
-  done: boolean
-  date: number
-}
-
-const todoList: ToDoItem[] = reactive([
-  {
-    title: 'Выключить двойную розетку',
-    id: 101,
-    done: false,
-    date: Date.now(),
-  },
-  {
-    title: 'Закрыть окно в комнате',
-    id: 201,
-    done: false,
-    date: Date.now() + 1,
-  },
-  {
-    title: 'Выключить розетку у компьютера',
-    id: 301,
-    done: true,
-    date: Date.now() + 2,
-  },
-])
-
-const onUpdateTodo = (ID: number): void => {
-  todoList.forEach((todo) => todo.id === ID && (todo.done = !todo.done))
-}
+const { leavingAffairs, setAffairAsDone } = useLeavingAffairsStore()
 </script>
 
 <template>
   <ul class="todo-list">
-    <li v-for="{ title, id, date, done } in todoList" v-bind:key="id">
-      <TodoItem v-on:update="onUpdateTodo" :title="title" :date="date" :id="id" :done="done" />
+    <li v-for="{ title, id, date, done } in leavingAffairs" v-bind:key="id">
+      <TodoItem v-on:update="setAffairAsDone" :title="title" :date="date" :id="id" :done="done" />
     </li>
   </ul>
 </template>

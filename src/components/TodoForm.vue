@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Transition } from 'vue'
+import { useLeavingAffairsStore } from '@/store/leavingAffairsStore'
+import { onMounted, onUnmounted, reactive, Transition } from 'vue'
 
 const emit = defineEmits<{
   onclose: []
@@ -8,14 +9,35 @@ const emit = defineEmits<{
 defineProps({
   isFormVisible: Boolean,
 })
+
+const formData = reactive({
+  id: Date.now(),
+  title: '',
+  done: false,
+  date: Date.now(),
+})
+const { addAffair } = useLeavingAffairsStore()
+
+const onSubmit = () => {
+  if (formData.title) {
+    addAffair(formData)
+    emit('onclose')
+    formData.title = ''
+  }
+}
+
+onMounted(() => {
+  formData.date = Date.now()
+  formData.id = Date.now()
+})
 </script>
 
 <template>
   <Transition name="smooth">
     <div v-if="isFormVisible" id="case-form-overlay">
-      <form id="case-form">
+      <form id="case-form" @submit.prevent="onSubmit">
         <h2>Enter the case u need to do before leaving the home</h2>
-        <input type="text" placeholder="Enter the case" />
+        <input v-model="formData.title" type="text" placeholder="Enter the case" />
         <button id="sibmit" type="submit">Add Case</button>
         <button id="close" type="button" v-on:click="emit('onclose')">x</button>
       </form>
@@ -25,11 +47,11 @@ defineProps({
 
 <style lang="scss" scoped>
 .smooth-enter-active {
-  transition: all 1s ease-out;
+  transition: all 0.75s ease-out;
 }
 
 .smooth-leave-active {
-  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.75s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 .smooth-enter-from,
