@@ -5,7 +5,7 @@ export default {}
 <template>
   <header>
     <p>MyApp</p>
-    <button>X</button>
+    <!-- <button>X</button> -->
   </header>
 </template>
 

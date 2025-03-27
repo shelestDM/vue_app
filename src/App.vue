@@ -15,7 +15,7 @@ const toggleForm = (): void => {
 <template>
   <CustomHeader />
   <TodoList />
-  <TodoForm v-on:onclose="toggleForm" v-if="isFormVisible" />
+  <TodoForm v-on:onclose="toggleForm" :isFormVisible="isFormVisible" />
   <CustomButton v-on:click="toggleForm" title="Add" class-name="custom-button" />
 </template>
 

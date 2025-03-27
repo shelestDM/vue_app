@@ -1,44 +1,66 @@
 <script setup lang="ts">
+import { Transition } from 'vue'
+
 const emit = defineEmits<{
   onclose: []
 }>()
+
+defineProps({
+  isFormVisible: Boolean,
+})
 </script>
 
 <template>
-  <div id="case-form-overlay">
-    <form id="case-form">
-      <h2>Enter the case u need to do before leaving the home</h2>
-      <input type="text" placeholder="Enter the case" />
-      <button id="sibmit" type="submit">Add Case</button>
-      <button id="close" type="button" v-on:click="emit('onclose')">x</button>
-    </form>
-  </div>
+  <Transition name="smooth">
+    <div v-if="isFormVisible" id="case-form-overlay">
+      <form id="case-form">
+        <h2>Enter the case u need to do before leaving the home</h2>
+        <input type="text" placeholder="Enter the case" />
+        <button id="sibmit" type="submit">Add Case</button>
+        <button id="close" type="button" v-on:click="emit('onclose')">x</button>
+      </form>
+    </div>
+  </Transition>
 </template>
 
 <style lang="scss" scoped>
+.smooth-enter-active {
+  transition: all 1s ease-out;
+}
+
+.smooth-leave-active {
+  transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.smooth-enter-from,
+.smooth-leave-to {
+  transform: translate(-100%);
+  opacity: 0;
+}
+
 #case-form-overlay {
-  width: 100vw;
-  height: 100vh;
+  width: fit-content;
   position: fixed;
-  top: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
-  background-color: rgba(128, 128, 128, 0.396);
   z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 20%;
 
   #case-form {
-    width: 80%;
-    max-width: 370px;
+    width: 100%;
+    max-width: 400px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 25px;
+    gap: 30px;
     background-color: whitesmoke;
-    padding: 20px;
+    padding: 30px;
     border-radius: 15px;
     position: relative;
 
@@ -54,13 +76,14 @@ const emit = defineEmits<{
       box-shadow: 0px 0px 10px gray;
       border-radius: 10px;
       padding: 10px;
-      width: 80%;
+      width: 100%;
     }
     #sibmit {
       padding: 10px;
       border-radius: 10px;
       background-color: #10b981;
       color: white;
+      align-self: end;
     }
     #close {
       position: absolute;

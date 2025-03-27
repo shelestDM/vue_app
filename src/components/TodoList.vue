@@ -12,19 +12,19 @@ export type ToDoItem = {
 const todoList: ToDoItem[] = reactive([
   {
     title: 'Выключить двойную розетку',
-    id: 1,
+    id: 101,
     done: false,
     date: Date.now(),
   },
   {
     title: 'Закрыть окно в комнате',
-    id: 2,
+    id: 201,
     done: false,
     date: Date.now() + 1,
   },
   {
     title: 'Выключить розетку у компьютера',
-    id: 3,
+    id: 301,
     done: true,
     date: Date.now() + 2,
   },

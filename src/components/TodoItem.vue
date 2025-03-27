@@ -19,8 +19,8 @@ const onUpdateTodo = (id: number): void => {
 </script>
 
 <template>
-  <div class="todo-item" :id="`${id}`" @click="onUpdateTodo(id)">
-    <CustomCheckbox :done="done" />
+  <div class="todo-item" :id="`${id}`" v-on:click="onUpdateTodo(id)">
+    <CustomCheckbox :id="id" :done="done" />
     <p :class="{ done: done }">{{ title }}</p>
   </div>
 </template>
