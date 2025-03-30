@@ -24,8 +24,8 @@ defineProps({
   transition: 0.5s ease;
 
   &.done {
-    border-color: #10b981;
-    background-color: #10b981;
+    border-color: var(--accent_color);
+    background-color: var(--accent_color);
   }
 }
 

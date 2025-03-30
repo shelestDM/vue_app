@@ -22,10 +22,11 @@ const toggleForm = (): void => {
 <style lang="scss" scoped>
 .custom-button {
   position: fixed;
-  bottom: 50px;
-  right: 50px;
-  background-color: #10b981;
-  padding: 20px;
+  bottom: 40px;
+  right: 40px;
+  background-color: var(--accent_color);
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   color: white;
 }

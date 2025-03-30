@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import CustomCheckbox from '@/components/CustomCheckbox.vue'
-import type { LeavingAffairs } from '@/store/leavingAffairsStore'
+import type { LeavingAffair } from '@/store/leavingAffairsStore'
 
-withDefaults(defineProps<LeavingAffairs>(), {
+withDefaults(defineProps<LeavingAffair>(), {
   title: '',
   done: false,
   id: 0,
@@ -42,6 +42,7 @@ const onUpdateTodo = (id: number): void => {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
     &::before {
       display: block;
       content: '';

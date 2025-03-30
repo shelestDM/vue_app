@@ -2,13 +2,19 @@
 import TodoItem from '@/components/TodoItem.vue'
 import { useLeavingAffairsStore } from '@/store/leavingAffairsStore'
 
-const { leavingAffairs, setAffairAsDone } = useLeavingAffairsStore()
+const leavingAffairsStore = useLeavingAffairsStore()
 </script>
 
 <template>
   <ul class="todo-list">
-    <li v-for="{ title, id, date, done } in leavingAffairs" v-bind:key="id">
-      <TodoItem v-on:update="setAffairAsDone" :title="title" :date="date" :id="id" :done="done" />
+    <li v-for="{ title, id, date, done } in leavingAffairsStore.leavingAffairs" v-bind:key="id">
+      <TodoItem
+        v-on:update="leavingAffairsStore.setAffairAsDone"
+        :title="title"
+        :date="date"
+        :id="id"
+        :done="done"
+      />
     </li>
   </ul>
 </template>

@@ -1,35 +1,41 @@
 <script setup lang="ts">
 import { useLeavingAffairsStore } from '@/store/leavingAffairsStore'
-import { onMounted, onUnmounted, reactive, Transition } from 'vue'
+import { reactive, watch } from 'vue'
 
 const emit = defineEmits<{
   onclose: []
 }>()
 
-defineProps({
+const props = defineProps({
   isFormVisible: Boolean,
 })
 
 const formData = reactive({
-  id: Date.now(),
+  id: 0,
   title: '',
   done: false,
-  date: Date.now(),
+  date: 0,
 })
-const { addAffair } = useLeavingAffairsStore()
+const leavingAffairsStore = useLeavingAffairsStore()
 
 const onSubmit = () => {
   if (formData.title) {
-    addAffair(formData)
+    leavingAffairsStore.addAffair({ ...formData })
     emit('onclose')
-    formData.title = ''
   }
 }
 
-onMounted(() => {
-  formData.date = Date.now()
-  formData.id = Date.now()
-})
+watch(
+  () => props.isFormVisible,
+  () => {
+    if (!props.isFormVisible) {
+      formData.title = ''
+    } else {
+      formData.date = Date.now()
+      formData.id = Date.now()
+    }
+  },
+)
 </script>
 
 <template>
@@ -37,7 +43,7 @@ onMounted(() => {
     <div v-if="isFormVisible" id="case-form-overlay">
       <form id="case-form" @submit.prevent="onSubmit">
         <h2>Enter the case u need to do before leaving the home</h2>
-        <input v-model="formData.title" type="text" placeholder="Enter the case" />
+        <input v-focus v-model="formData.title" type="text" placeholder="Enter the case" />
         <button id="sibmit" type="submit">Add Case</button>
         <button id="close" type="button" v-on:click="emit('onclose')">x</button>
       </form>
@@ -103,7 +109,7 @@ onMounted(() => {
     #sibmit {
       padding: 10px;
       border-radius: 10px;
-      background-color: #10b981;
+      background-color: var(--accent_color);
       color: white;
       align-self: end;
     }

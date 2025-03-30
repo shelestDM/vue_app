@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive } from "vue";
 
-export type LeavingAffairs = {
+export type LeavingAffair = {
     id: number
     title: string
     done: boolean
@@ -9,7 +9,7 @@ export type LeavingAffairs = {
 }
 
 export const useLeavingAffairsStore = defineStore('leavingAffairs', () => {
-    const leavingAffairs: LeavingAffairs[] = reactive([
+    const leavingAffairs: LeavingAffair[] = reactive([
         {
             title: 'Выключить двойную розетку',
             id: 101,
@@ -30,7 +30,7 @@ export const useLeavingAffairsStore = defineStore('leavingAffairs', () => {
         },
     ]);
 
-    function addAffair(newAffair: LeavingAffairs) {
+    function addAffair(newAffair: LeavingAffair) {
         leavingAffairs.unshift(newAffair)
     }
 
