@@ -52,20 +52,6 @@ watch(
 </template>
 
 <style lang="scss" scoped>
-.smooth-enter-active {
-  transition: all 0.75s ease-out;
-}
-
-.smooth-leave-active {
-  transition: all 0.75s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.smooth-enter-from,
-.smooth-leave-to {
-  transform: translate(-100%);
-  opacity: 0;
-}
-
 #case-form-overlay {
   width: fit-content;
   position: fixed;

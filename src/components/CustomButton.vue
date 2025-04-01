@@ -1,16 +1,16 @@
 <script setup lang="ts">
 type Buttonprops = {
-  title: string
-  className: string
+  title?: string
 }
-withDefaults(defineProps<Buttonprops>(), {
-  title: 'App button',
-  className: '',
-})
+
+const props = defineProps<Buttonprops>()
 </script>
 
 <template>
-  <button :class="className">{{ title }}</button>
+  <button>
+    {{ props.title }}
+    <slot></slot>
+  </button>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

@@ -34,6 +34,9 @@ const onUpdateTodo = (id: number): void => {
   align-items: center;
   gap: 10px;
   width: 100%;
+  transform: translate(-100%);
+  opacity: 0;
+  animation: smooth_slide 0.5s cubic-bezier(0.5, 1, 0.6, 1) 0s 1 forwards;
 
   p {
     max-width: 85%;
@@ -59,6 +62,17 @@ const onUpdateTodo = (id: number): void => {
     &::before {
       transform: translateX(0%);
     }
+  }
+}
+
+@keyframes smooth_slide {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
   }
 }
 </style>

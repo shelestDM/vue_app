@@ -1,5 +1,6 @@
+import { LeavingAffairModel } from "@/model/leavingAffairs";
 import { defineStore } from "pinia";
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 
 export type LeavingAffair = {
     id: number
@@ -8,27 +9,9 @@ export type LeavingAffair = {
     date: number
 }
 
+
 export const useLeavingAffairsStore = defineStore('leavingAffairs', () => {
-    const leavingAffairs: LeavingAffair[] = reactive([
-        {
-            title: 'Выключить двойную розетку',
-            id: 101,
-            done: false,
-            date: Date.now(),
-        },
-        {
-            title: 'Закрыть окно в комнате',
-            id: 201,
-            done: false,
-            date: Date.now() + 1,
-        },
-        {
-            title: 'Выключить розетку у компьютера',
-            id: 301,
-            done: true,
-            date: Date.now() + 2,
-        },
-    ]);
+    const leavingAffairs: LeavingAffair[] = reactive([]);
 
     function addAffair(newAffair: LeavingAffair) {
         leavingAffairs.unshift(newAffair)
@@ -38,5 +21,19 @@ export const useLeavingAffairsStore = defineStore('leavingAffairs', () => {
         leavingAffairs.forEach((leavingAffair) => leavingAffair.id === affairID && (leavingAffair.done = !leavingAffair.done))
     }
 
-    return { leavingAffairs, addAffair, setAffairAsDone }
+    function setAllAffairsUndone() {
+        leavingAffairs.forEach(leavingAffair => leavingAffair.done = false);
+    }
+
+    function setLeavingAffairsFromLS() {
+        const leavingAffairsFromLS = LeavingAffairModel.getLeavingAffairsFromLocalStorage();
+
+        leavingAffairsFromLS.forEach(leavingAffair => leavingAffairs.push(leavingAffair))
+    }
+
+    // watch(leavingAffairs, (currentAffairs) => {
+    //     LeavingAffairModel.setFreshAffairsInLocalStorage(currentAffairs)
+    // })
+
+    return { leavingAffairs, addAffair, setAffairAsDone, setAllAffairsUndone, setLeavingAffairsFromLS }
 })

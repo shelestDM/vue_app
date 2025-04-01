@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import CheckIcon from '@/assets/CheckIcon.svg'
+import IconCheckbox from '@/assets/IconCheckbox.vue'
 
 defineProps({
   done: Boolean,
@@ -10,7 +10,7 @@ defineProps({
 <template>
   <div :id="`checkbox-${id}`" class="custom-checkbox" :class="{ done: done }">
     <Transition name="smooth">
-      <CheckIcon class="icon" />
+      <IconCheckbox class="icon" />
     </Transition>
   </div>
 </template>

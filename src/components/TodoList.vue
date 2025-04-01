@@ -7,13 +7,17 @@ const leavingAffairsStore = useLeavingAffairsStore()
 
 <template>
   <ul class="todo-list">
-    <li v-for="{ title, id, date, done } in leavingAffairsStore.leavingAffairs" v-bind:key="id">
+    <li
+      v-for="({ title, id, date, done }, index) in leavingAffairsStore.leavingAffairs"
+      v-bind:key="id"
+    >
       <TodoItem
         v-on:update="leavingAffairsStore.setAffairAsDone"
         :title="title"
         :date="date"
         :id="id"
         :done="done"
+        :style="{ animationDelay: 200 * (index + 1) + 'ms' }"
       />
     </li>
   </ul>
